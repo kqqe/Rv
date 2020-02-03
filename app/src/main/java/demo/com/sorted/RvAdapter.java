@@ -30,8 +30,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.RvViewholder>{
     @Override
     public void onBindViewHolder(@NonNull RvViewholder holder, int position) {
         Integer model = models.get(position);
-       // Model model = models.get(position);
-        holder.textViewNumber.setText("" + models);
+        holder.textViewNumber.setText("" + model);
     }
 
     @Override

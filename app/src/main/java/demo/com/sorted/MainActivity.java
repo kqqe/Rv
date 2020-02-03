@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         editText = findViewById(R.id.editText);
         final RvAdapter adapter = new RvAdapter(models);
         buttonAdd= findViewById(R.id.buttonAdd);
+
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,12 +44,13 @@ public class MainActivity extends AppCompatActivity {
                  if(num != null) {
                      sorted(models);
                      recyclerView.getAdapter().notifyDataSetChanged();
+
                  }
             }
         });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-        sorted(models);
 
     }
 
