@@ -1,7 +1,6 @@
 package demo.com.sorted;
 
-import android.graphics.ColorSpace;
-import android.view.Display;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
