@@ -35,40 +35,45 @@ public class MainActivity extends FragmentActivity {
 
         oneFragment = new OneFragment();
         twoFragment = new TwoFragment();
-        isBackStack = (Switch)findViewById(R.id.switchBackStack);// попробовать без каста!
+      //  isBackStack = findViewById(R.id.switchBackStack);
+
+
+        transaction = manager.beginTransaction();
+        transaction.add(R.id.container, oneFragment, OneFragment.TAG);
+        transaction.commit();
     }
 
-        public void onClickFragment(View view) {
-            transaction = manager.beginTransaction();
-
-            switch (view.getId()) {
-
-                case R.id.buttonAddFrgOne:
-                    if (manager.findFragmentByTag(OneFragment.TAG) == null) {
-                        transaction.add(R.id.container, oneFragment, OneFragment.TAG);
-                    }
-                    break;
-                case R.id.buttonDelete:
-                    if (manager.findFragmentByTag(OneFragment.TAG) != null) {
-                        transaction.remove(oneFragment);
-                    }
-                    break;
-                case R.id.buttonReplace:
-                    if (manager.findFragmentByTag(OneFragment.TAG) != null) {
-                        transaction.replace(R.id.container, twoFragment, TwoFragment.TAG);
-                    }
-                    if (manager.findFragmentByTag(TwoFragment.TAG) != null) {
-
-                        transaction.replace(R.id.container, oneFragment, OneFragment.TAG);
-                    }
-                    break;
-            }
-            if (isBackStack.isChecked()) {
-                transaction.addToBackStack(null);
-             }
-
-            transaction.commit();
-    }
+//        public void onClickFragment(View view) {
+//            transaction = manager.beginTransaction();
+//
+//            switch (view.getId()) {
+//
+//                case R.id.buttonAddFrgOne:
+//                    if (manager.findFragmentByTag(OneFragment.TAG) == null) {
+//                        transaction.add(R.id.container, oneFragment, OneFragment.TAG);
+//                    }
+//                    break;
+//                case R.id.buttonDelete:
+//                    if (manager.findFragmentByTag(OneFragment.TAG) != null) {
+//                        transaction.remove(oneFragment);
+//                    }
+//                    break;
+//                case R.id.buttonReplace:
+//                    if (manager.findFragmentByTag(OneFragment.TAG) != null) {
+//                        transaction.replace(R.id.container, twoFragment, TwoFragment.TAG);
+//                    }
+//                    if (manager.findFragmentByTag(TwoFragment.TAG) != null) {
+//
+//                        transaction.replace(R.id.container, oneFragment, OneFragment.TAG);
+//                    }
+//                    break;
+//            }
+//            if (isBackStack.isChecked()) {
+//                transaction.addToBackStack(null);
+//             }
+//
+//            transaction.commit();
+//    }
 
 
 

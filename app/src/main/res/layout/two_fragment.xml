@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
 
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="обратно" />
+
     <TextView
         android:id="@+id/textViewFragmentTwo"
         android:layout_width="match_parent"

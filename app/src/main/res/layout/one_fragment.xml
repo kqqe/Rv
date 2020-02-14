@@ -16,6 +16,12 @@
         android:layout_height="wrap_content"
         android:text="Добавить" />
 
+    <Button
+        android:id="@+id/changeItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сортированный" />
+
     <EditText
         android:id="@+id/editTextAddNumber"
         android:layout_width="match_parent"
