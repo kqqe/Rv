@@ -1,14 +1,21 @@
 package demo.com.sorted;
 
-public class Model {
-    public  int numder;
+import java.util.ArrayList;
+import java.util.Collections;
 
-    public Model(int numder) {
-        this.numder = numder;
-    }
+class Model {
+    private ArrayList<Integer> numder = new ArrayList<>();
 
-    public int getNumder() {
+    ArrayList<Integer> getNumder() {
         return numder;
     }
 
+    void setNumder(Integer num) {
+            numder.add(num);
+    }
+
+    ArrayList<Integer> getSorted(){
+        Collections.sort(numder);
+        return numder;
+    }
 }

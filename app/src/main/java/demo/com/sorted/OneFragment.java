@@ -1,6 +1,5 @@
 package demo.com.sorted;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,21 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class OneFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private FragmentManager manager;
     private FragmentTransaction transaction;
-
-    private ArrayList<Integer> models = new ArrayList<>();
     private EditText editText;
-    private Button buttonAdd;
-    private Button changeItem;
-
-    public final static  String TAG = "OneFragmentTag";
+    final static  String TAG = "OneFragmentTag";
 
     @Nullable
     @Override
@@ -39,28 +31,22 @@ public class OneFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.one_fragment, container,false);
-
+        App app = (App)getActivity().getApplicationContext();
+        Model model = app.getModel();
+        final PresenterOne presenterOne = new PresenterOne(model);
+        presenterOne.setOneFragment(this);
         recyclerView= view.findViewById(R.id.RvBefore);
         editText = view.findViewById(R.id.editTextAddNumber);
-        final RvAdapter adapter = new RvAdapter(models);
-        buttonAdd= view.findViewById(R.id.buttonAddFrgOne);
-        changeItem = view.findViewById(R.id.changeItem);
+        Button buttonAdd= view.findViewById(R.id.buttonAddFrgOne);
+        Button changeItem = view.findViewById(R.id.changeItem);
         manager = getFragmentManager();
 
-        Bundle bundle = new Bundle();
-        bundle.putIntegerArrayList("kek", models);
         final TwoFragment twoFragment = new TwoFragment();
-        twoFragment.setArguments(bundle);
-
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Integer num = Integer.parseInt(editText.getText().toString().trim());
-                models.add(num);
-                if(num != null) {
-                    recyclerView.getAdapter().notifyDataSetChanged();
-
-                }
+                presenterOne.OnButtonClicked(num);
             }
         });
 
@@ -75,10 +61,19 @@ public class OneFragment extends Fragment {
             }
 
         });
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
+        presenterOne.onViewCreate();
         return view;
     }
 
+    public void onListChanged(ArrayList<Integer> list) {
+        if (recyclerView.getAdapter() != null){
+            recyclerView.getAdapter().notifyDataSetChanged();
+        }else {
+            RvAdapter adapter = new RvAdapter(list);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setAdapter(adapter);
+        }
+
+
+    }
 }
